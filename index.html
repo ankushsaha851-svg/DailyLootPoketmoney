@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Watch & Earn</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg,#0b1c3d,#070f26);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.app{
+  text-align:center;
+  width:90%;
+  max-width:350px;
+}
+
+.header{
+  font-size:26px;
+  font-weight:bold;
+  margin-bottom:15px;
+}
+
+.balance{
+  background:rgba(255,255,255,0.1);
+  padding:15px;
+  border-radius:14px;
+  margin-bottom:25px;
+}
+
+.balance p{
+  margin:0;
+  opacity:0.8;
+}
+
+.balance h2{
+  margin:5px 0 0;
+  font-size:28px;
+}
+
+.watch-btn{
+  width:130px;
+  height:130px;
+  margin:0 auto;
+  background:gold;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:55px;
+  color:#000;
+  cursor:pointer;
+  box-shadow:0 0 30px gold;
+  transition:0.2s;
+}
+
+.watch-btn:active{
+  transform:scale(0.95);
+}
+
+.info{
+  margin-top:18px;
+  font-size:14px;
+  opacity:0.85;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+  <div class="header">🎁 Daily Loot</div>
+
+  <div class="balance">
+    <p>Your Balance</p>
+    <h2><span id="coin">0</span> Coins</h2>
+  </div>
+
+  <div class="watch-btn" onclick="watchAd()">▶</div>
+
+  <div class="info">Earn 10 coins per ad</div>
+</div>
+
+<!-- 🔴 Monetag Script -->
+<script src='//libtl.com/sdk.js'
+        data-zone='10582787'
+        data-sdk='show_10582787'></script>
+
+<script>
+let coins = localStorage.getItem("coins")
+  ? parseInt(localStorage.getItem("coins"))
+  : 0;
+
+document.getElementById("coin").innerText = coins;
+
+function watchAd(){
+  if(typeof show_10582787 === "function"){
+    show_10582787(); // Monetag Ad
+  }
+
+  // Reward logic (basic)
+  setTimeout(()=>{
+    coins += 10;
+    localStorage.setItem("coins", coins);
+    document.getElementById("coin").innerText = coins;
+    alert("🎉 You earned 10 coins!");
+  }, 3000);
+}
+</script>
+
+</body>
+</html>
